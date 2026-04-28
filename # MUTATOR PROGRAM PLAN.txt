@@ -1,0 +1,51 @@
+# MUTATOR PROGRAM PLAN
+-- user input management
+> needed background
+
+## 1) SETUP:
+#### setup directories, load mutant sequence, create toy prediction to prepare boltz2 weights...
+-- load packages create directory
+-- input sequences, project name
+-- input indices of the sequences to mutate
+-- load boltz2 with toy
+
+> directory_structure
+> run_one_boltz2
+> yaml_creator
+
+## 2) CREATE MUTATIONS
+#### mutators 400 sequences: 250 random, 50 feeler-guesser, 50 naive guesser, 50 educate guesser
+> mutant_manager
+> random_mutator
+> feeler_guesser++
+> naive_gusser => voxelizer on demand + trainV8
+> interaction_categorizer 
+> educated guesser
+
+## 3) PREDICT MUTATS AND RELAX
+#### run boltz2 and pytosetta multithreaded
+> predict_boltz2_batches
+> pyrosettas_relaxer_worker
+> pyrosettas_relaxer_organizer
+
+## 4) ASSES MUTANTS
+#### use pyrosetas XYZ metrics
+> interaction_assesor_worker
+> interaction_assesor_organizer
+
+## 5) ASSES BEST MUTANT
+#### relax 500 times see energy distribution
+> pyrosettas_relaxer_organizer => pool needs to allow for working on the same protein
+
+## 6) NEW GENERATION => STEP 2 NEW BASELINE
+#### select best mutant new round of evolution
+> evaluator_mutant_chooser
+> crossbreeder??? => mix sequences from the best new mutants
+
+::::::::::::::::::
+PRE-NEEDED:
+> mbioq unified, standardized and gitet
+> elemnts dicts standardized and gitet + good atomic radius
+> aminoacids and nucleotides standardized and gitet
+> directory_structure download packages
+::::::::::::::::::
